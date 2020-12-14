@@ -26,10 +26,10 @@ window.addEventListener('DOMContentLoaded', function() {
 		function updateClock() {   // выводит счет на экран постоянный
 			const timer = getTimeRemining();
 
-			timerHours.textContent = timer.hours;
-			timerMinutes.textContent = timer.minutes;
-			timerSeconds.innerHTML = timer.seconds;
-			timerDays.textContent = timer.days;
+			timerHours.textContent = timer.hours < 10 ? '0' + timer.hours : timer.hours; // добавляет 0 перед числом!
+			timerMinutes.textContent = timer.minutes < 10 ? '0' + timer.minutes : timer.minutes;
+			timerSeconds.innerHTML = timer.seconds < 10 ? '0' + timer.seconds : timer.seconds;
+			timerDays.textContent = timer.days < 10 ? '0' + timer.days : timer.days;
 
 			if (timer.timeRemining <= 0) {    // обнуляет счетчик по истечении срока
 				timerHours.textContent = "00";
@@ -39,6 +39,7 @@ window.addEventListener('DOMContentLoaded', function() {
 				clearInterval(timer.timeRemining);
 			}
 
+
 			/* if (timer.timeRemining >= 0) {
 				setTimeout(updateClock, 1000);   // первый способ с помощью setTimeout
 			} */
@@ -46,6 +47,8 @@ window.addEventListener('DOMContentLoaded', function() {
 			setInterval(() => {
 				updateClock();  // второй способ с помощью setInterval
 			}, 1000);
+
+
 		}
 		updateClock();
 	}
