@@ -30,9 +30,12 @@ window.addEventListener('DOMContentLoaded', function() {
 			timerSeconds.innerHTML = timer.seconds;
 			timerDays.textContent = timer.days;
 
-			if (timer.timeRemining >= 0) {
-				setTimeout(updateClock, 1000);
-			}
+			/* if (timer.timeRemining >= 0) {
+				setTimeout(updateClock, 1000);   // первый способ с помощью setTimeout
+			} */
+			setInterval(() => {
+				updateClock();  // второй способ с помощью setInterval
+			}, 1000);
 		}
 		updateClock();
 	}
