@@ -33,9 +33,13 @@ window.addEventListener('DOMContentLoaded', function() {
 
 			if (timer.timeRemining <= 0) {    // обнуляет счетчик по истечении срока
 				timerHours.textContent = "00";
+				timerHours.style.color = 'red';
 				timerMinutes.textContent = '00';
+				timerMinutes.style.color = 'red';
 				timerSeconds.innerHTML = '00';
+				timerSeconds.style.color = 'red';
 				timerDays.textContent = '00';
+				timerDays.style.color = 'red';
 				clearInterval(timer.timeRemining);
 			}
 
