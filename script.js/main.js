@@ -19,6 +19,13 @@ window.addEventListener('DOMContentLoaded', function() {
 				minutes = Math.floor((timeRemining / 60) % 60), // минуты
 				hours = Math.floor(timeRemining / 60 / 60) % 24, // часы (24 часа в дне)
 				days =  Math.floor(timeRemining / 60 / 60 / 24);  // дни
+			if (timeRemining <= 0) {
+				timerHours.textContent = "00";
+				timerMinutes.textContent = '00';
+				timerSeconds.innerHTML = '00';
+				timerDays.textContent = '00';
+				clearInterval(timeRemining);
+			}
 			return { timeRemining, days, hours, minutes, seconds };
 		}
 
@@ -33,11 +40,12 @@ window.addEventListener('DOMContentLoaded', function() {
 			/* if (timer.timeRemining >= 0) {
 				setTimeout(updateClock, 1000);   // первый способ с помощью setTimeout
 			} */
+
 			setInterval(() => {
 				updateClock();  // второй способ с помощью setInterval
 			}, 1000);
 		}
 		updateClock();
 	}
-	countTimer('31 december 2020');
+	countTimer('13 december 2020');
 });
