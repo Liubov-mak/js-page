@@ -12,7 +12,6 @@ window.addEventListener('DOMContentLoaded', function() {
 
 		function getTimeRemining() {
 			const dateStop = new Date(deadline).getTime(),    // дата дедлайна
-				// eslint-disable-next-line max-len
 				dateNow = new Date().getTime(), // получили текущую дату (чтобы посчитать разницу нам нужно получить милисекунды с использованием метода getTime)
 				timeRemining = (dateStop - dateNow) / 1000, // делим на 1000 чтобы из милисекунды сделать секунды
 				seconds = Math.floor(timeRemining % 60), // секунды
@@ -43,7 +42,6 @@ window.addEventListener('DOMContentLoaded', function() {
 				clearInterval(timer.timeRemining);
 			}
 
-
 			/* if (timer.timeRemining >= 0) {
 				setTimeout(updateClock, 1000);   // первый способ с помощью setTimeout
 			} */
@@ -51,10 +49,73 @@ window.addEventListener('DOMContentLoaded', function() {
 			setInterval(() => {
 				updateClock();  // второй способ с помощью setInterval
 			}, 1000);
-
-
 		}
 		updateClock();
 	}
 	countTimer('31 december 2020');
+
+	// меню
+
+	const toggleMenu = () => {
+		const btnMenu = document.querySelector('.menu'),
+			menu = document.querySelector('menu'),
+			closeBtn = document.querySelector('.close-btn'),
+			menuList = menu.querySelectorAll('ul>li');
+
+		const handlerMenu = () => {
+			/* if (!menu.style.transform || menu.style.transform === `translate(-100%)`) { // translate потому что скрывают меню так а не display none. дополнительное условие дает возможность повторного нажатия
+				menu.style.transform = `translate(0)`;
+			} else {
+				menu.style.transform = `translate(-100%)`;
+			} */  // это равнозначно следующему действию ниже
+
+			menu.classList.toggle('active-menu'); // этот класс прописан в css стилях - анимация
+		};
+
+		btnMenu.addEventListener('click', handlerMenu);
+		closeBtn.addEventListener('click', handlerMenu);
+		/* for (let i = 0; i < menuList.length; i++) { //при нажатии на список меню меню скрывается
+			menuList[i].addEventListener('click', handlerMenu);
+		} */  // этот цикл равнозначен циклу forEach ниже
+		menuList.forEach(elem => elem.addEventListener('click', handlerMenu)); //при нажатии на список меню меню скрывается
+	};
+	toggleMenu();
+
+	// popup
+
+	const togglePopUp = () => {
+		const popupBtn = document.querySelectorAll('.popup-btn'),
+			popup = document.querySelector('.popup'),
+			popupClose = document.querySelector('.popup-close');
+
+		popupBtn.forEach(elem => elem.addEventListener('click', () => {
+			popup.style.display = 'block';
+			const popupContent = document.querySelector('.popup-content');
+			popupContent.style.top = '0 px';
+			let count = 0;
+			let popupAnim = function() {
+				count++;
+				popupContent.style.top = count + 'px';
+				if (count < 300) {
+					setTimeout(popupAnim, 10);
+				}
+				clearTimeout(popupAnim);
+			};
+			popupAnim();
+			clearTimeout(popupAnim);
+			const intViewportWidth = window.innerWidth;
+			if (intViewportWidth < 768) {
+				popupAnim = '';
+			}
+		}));
+
+
+		popupClose.addEventListener('click', () => {
+			popup.style.display = 'none';
+		});
+		popup.addEventListener('click', () => {
+			popup.style.display = 'none';
+		});
+	};
+	togglePopUp();
 });
