@@ -78,6 +78,38 @@ window.addEventListener('DOMContentLoaded', function() {
 			menuList[i].addEventListener('click', handlerMenu);
 		} */  // этот цикл равнозначен циклу forEach ниже
 		menuList.forEach(elem => elem.addEventListener('click', handlerMenu)); //при нажатии на список меню меню скрывается
+
+		const service = document.querySelector('.service'),
+			portfolio = document.querySelector('.portfolio');
+		menuList[0].addEventListener('click', () => {
+			event.preventDefault();
+			document.documentElement.scrollTop = 900;
+			service.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			});
+		});
+		menuList[1].addEventListener('click', () => {
+			event.preventDefault();
+			document.documentElement.scrollTop = 1980;
+			portfolio.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			});
+		});
+		menuList[2].addEventListener('click', () => {
+			event.preventDefault();
+			document.documentElement.scrollTop = 2740;
+		});
+		menuList[3].addEventListener('click', () => {
+			event.preventDefault();
+			document.documentElement.scrollTop = 3745;
+		});
+		menuList[4].addEventListener('click', () => {
+			event.preventDefault();
+			document.documentElement.scrollTop = 4745;
+		});
+
 	};
 	toggleMenu();
 
