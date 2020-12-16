@@ -59,26 +59,25 @@ window.addEventListener('DOMContentLoaded', function() {
 	const toggleMenu = () => {
 		const btnMenu = document.querySelector('.menu'),
 			menu = document.querySelector('menu'),
-			closeBtn = document.querySelector('.close-btn'),
 			menuList = menu.querySelectorAll('ul>li');
-			/* activeMenu = document.querySelector('.active-menu'); */
 
 		const handlerMenu = () => {
-			/* if (!menu.style.transform || menu.style.transform === `translate(-100%)`) { // translate потому что скрывают меню так а не display none. дополнительное условие дает возможность повторного нажатия
-				menu.style.transform = `translate(0)`;
-			} else {
-				menu.style.transform = `translate(-100%)`;
-			} */  // это равнозначно следующему действию ниже
-
 			menu.classList.toggle('active-menu'); // этот класс прописан в css стилях - анимация
 		};
 
 		btnMenu.addEventListener('click', handlerMenu);
-		closeBtn.addEventListener('click', handlerMenu);
-		/* for (let i = 0; i < menuList.length; i++) { //при нажатии на список меню меню скрывается
-			menuList[i].addEventListener('click', handlerMenu);
-		} */  // этот цикл равнозначен циклу forEach ниже
-		menuList.forEach(elem => elem.addEventListener('click', handlerMenu)); //при нажатии на список меню меню скрывается
+		menu.addEventListener('click', event => {
+			let target = event.target;
+
+			if (target.classList.contains('close-btn')) {
+				return handlerMenu();
+			} else {
+				target = target.closest('.menu');
+				if (!target) {
+					return handlerMenu();
+				}
+			}
+		});
 
 		const service = document.querySelector('.service'),
 			portfolio = document.querySelector('.portfolio');
