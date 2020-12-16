@@ -61,6 +61,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			menu = document.querySelector('menu'),
 			closeBtn = document.querySelector('.close-btn'),
 			menuList = menu.querySelectorAll('ul>li');
+			/* activeMenu = document.querySelector('.active-menu'); */
 
 		const handlerMenu = () => {
 			/* if (!menu.style.transform || menu.style.transform === `translate(-100%)`) { // translate потому что скрывают меню так а не display none. дополнительное условие дает возможность повторного нажатия
@@ -99,11 +100,11 @@ window.addEventListener('DOMContentLoaded', function() {
 		});
 		menuList[2].addEventListener('click', () => {
 			event.preventDefault();
-			document.documentElement.scrollTop = 2740;
+			document.documentElement.scrollTop = 2375;
 		});
 		menuList[3].addEventListener('click', () => {
 			event.preventDefault();
-			document.documentElement.scrollTop = 3745;
+			document.documentElement.scrollTop = 3545;
 		});
 		menuList[4].addEventListener('click', () => {
 			event.preventDefault();
@@ -117,8 +118,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	const togglePopUp = () => {
 		const popupBtn = document.querySelectorAll('.popup-btn'),
-			popup = document.querySelector('.popup'),
-			popupClose = document.querySelector('.popup-close');
+			popup = document.querySelector('.popup');
 
 		popupBtn.forEach(elem => elem.addEventListener('click', () => {
 			popup.style.display = 'block';
@@ -141,13 +141,52 @@ window.addEventListener('DOMContentLoaded', function() {
 			}
 		}));
 
+		popup.addEventListener('click', event => {
+			let target = event.target;
 
-		popupClose.addEventListener('click', () => {
-			popup.style.display = 'none';
-		});
-		popup.addEventListener('click', () => {
-			popup.style.display = 'none';
+			if (target.classList.contains('popup-close')) { // здесь точка перед классом не нужна так как здесь есть classList
+				popup.style.display = 'none';
+			} else {
+				target = target.closest('.popup-content');
+				if (!target) {
+					popup.style.display = 'none';
+				}
+			}
 		});
 	};
 	togglePopUp();
+
+	// tabs
+
+	const tabs = () => {
+		const tabHeader = document.querySelector('.service-header'),
+			tab = tabHeader.querySelectorAll('.service-header-tab'),
+			tabContent = document.querySelectorAll('.service-tab');
+
+		const toggleTabContent = index => {
+			for (let i = 0; i < tabContent.length; i++) {
+				if (index === i) {
+					tab[i].classList.add('active');
+					tabContent[i].classList.remove('d-none');
+				} else {
+					tab[i].classList.remove('active');
+					tabContent[i].classList.add('d-none');
+				}
+			}
+		};
+
+		tabHeader.addEventListener('click', event => {
+			let target = event.target;
+			target = target.closest('.service-header-tab');
+
+			if (target) {
+				tab.forEach((item, i) => {
+					if (item === target) {
+						toggleTabContent(i);
+					}
+				});
+			}
+		});
+	};
+	tabs();
 });
