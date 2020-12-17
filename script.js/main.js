@@ -236,7 +236,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			nextSlide(dot, currentSlide, 'dot-active');
 		};
 
-		const startSlide = (time = 13000) => {
+		const startSlide = (time = 3000) => {
 			intervel = setInterval(autoPlaySlide, time);
 		};
 
@@ -289,7 +289,7 @@ window.addEventListener('DOMContentLoaded', function() {
 				startSlide();
 			}
 		});
-		startSlide(11500);
+		startSlide(1500);
 	};
 	slider();
 });
