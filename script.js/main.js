@@ -193,12 +193,28 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	const slider = () => {
 		const sliderContent = document.querySelector('.portfolio-content'),
-			slide = document.querySelectorAll('.portfolio-item'),
+			slide = document.querySelectorAll('.portfolio-item');
 			/* sliderBtn = document.querySelectorAll('.portfolio-btn'), */
-			dot = document.querySelectorAll('.dot');
-
+			/* dot = document.querySelectorAll('.dot'); */
+			/* sliderDots = document.querySelector('.portfolio-dots'); */
 		let currentSlide = 0, // первый слайд 0 - номер слайда
 			intervel; // для стопслайда
+
+		function addLi() { // функция по созданию списка li в существующем в верстке ul
+			const ul = document.querySelector('.portfolio-dots');
+			const li = document.createElement("li");
+			ul.appendChild(li);
+			li.classList.add('dot');
+
+			for (let i = 0; i < slide.length - 1; i++) {
+				ul.append(li.cloneNode());
+			}
+
+			const firstDot = document.querySelector("#all-progects > ul > li:nth-child(1)");
+			firstDot.classList.add('dot-active');
+		}
+		addLi();
+		const dot = document.querySelectorAll('.dot');
 
 		// автоперелистывание функция autoplay
 		const prevSlide = (elem, index, strClass) => {
@@ -220,7 +236,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			nextSlide(dot, currentSlide, 'dot-active');
 		};
 
-		const startSlide = (time = 3000) => {
+		const startSlide = (time = 13000) => {
 			intervel = setInterval(autoPlaySlide, time);
 		};
 
@@ -273,7 +289,8 @@ window.addEventListener('DOMContentLoaded', function() {
 				startSlide();
 			}
 		});
-		startSlide(1500);
+		startSlide(11500);
 	};
 	slider();
 });
+
