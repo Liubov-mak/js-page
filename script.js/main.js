@@ -196,7 +196,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			slide = document.querySelectorAll('.portfolio-item');
 			/* sliderBtn = document.querySelectorAll('.portfolio-btn'), */
 			/* dot = document.querySelectorAll('.dot'); */
-			/* sliderDots = document.querySelector('.portfolio-dots'); */
+
 		let currentSlide = 0, // первый слайд 0 - номер слайда
 			intervel; // для стопслайда
 
