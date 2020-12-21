@@ -292,5 +292,14 @@ window.addEventListener('DOMContentLoaded', function() {
 		startSlide(1500);
 	};
 	slider();
+
+	const pic = () => {
+		const img = document.querySelector(".command__photo");
+		img.addEventListener('mouseenter', event => {
+			event.target.src = event.target.dataset.img;
+		});
+
+	};
+	pic();
 });
 
