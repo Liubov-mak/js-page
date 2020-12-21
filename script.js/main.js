@@ -298,7 +298,6 @@ window.addEventListener('DOMContentLoaded', function() {
 		img.addEventListener('mouseenter', event => {
 			event.target.src = event.target.dataset.img;
 		});
-
 	};
 	pic();
 });
