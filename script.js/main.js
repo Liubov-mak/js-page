@@ -294,9 +294,22 @@ window.addEventListener('DOMContentLoaded', function() {
 	slider();
 
 	const pic = () => {
-		const img = document.querySelector(".command__photo");
-		img.addEventListener('mouseenter', event => {
-			event.target.src = event.target.dataset.img;
+		const command = document.querySelector('#command');
+		const src = command.querySelector("#command > div > div.row > div > img").src;
+		const links = { src };
+		console.log(links);
+
+		command.addEventListener('mouseover', event => {
+			if (event.target.matches('.command__photo')) {
+				event.target.src = event.target.dataset.img;
+				event.preventDefault();
+			}
+		});
+		command.addEventListener('mouseout', event => {
+
+			if (event.target.matches('.command__photo')) {
+				event.target.src = src;
+			}
 		});
 	};
 	pic();
