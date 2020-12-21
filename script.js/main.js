@@ -295,9 +295,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	const pic = () => {
 		const command = document.querySelector('#command');
-		const src = command.querySelector("#command > div > div.row > div > img").src;
-		const links = { src };
-		console.log(links);
+		const srcI = command.querySelector("#command > div > div.row > div > img").src;
 
 		command.addEventListener('mouseover', event => {
 			if (event.target.matches('.command__photo')) {
@@ -305,13 +303,35 @@ window.addEventListener('DOMContentLoaded', function() {
 				event.preventDefault();
 			}
 		});
+		/* for (let i = 0; i < srcI.length; i++) { */
 		command.addEventListener('mouseout', event => {
-
 			if (event.target.matches('.command__photo')) {
-				event.target.src = src;
+				event.target.src = srcI;
 			}
 		});
+		/* } */
 	};
 	pic();
+
+	const calc = () => {
+		const calcBlock = document.querySelector('.calc-block');
+		const input = calcBlock.querySelector("input");
+
+		/* for (let i = 0; i < input.length; i++) {
+			input[i].addEventListener('input', () => {
+				input.value = input.value.replace(/\D/i, '');
+			});
+			console.log(input[i]);
+		} */
+
+		input.addEventListener('input', () => {
+			input.value = input.value.replace(/\D/i, '');
+		});
+
+
+	};
+	calc();
 });
+
+
 
