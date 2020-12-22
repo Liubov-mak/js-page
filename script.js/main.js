@@ -360,14 +360,14 @@ window.addEventListener('DOMContentLoaded', function() {
 
 			// анимация total
 
-			/* let count = 0;
+			let count = 0;
 			setInterval(() => {
 				if (count < total) {
 					count++;
 					total.textContent = count;
 					console.log(count);
 				}
-			}, 200); */
+			}, 200);
 		};
 
 		calcBlock.addEventListener('change', event => {
