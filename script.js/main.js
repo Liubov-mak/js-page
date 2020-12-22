@@ -364,10 +364,11 @@ window.addEventListener('DOMContentLoaded', function() {
 			setInterval(() => {
 				if (count < total) {
 					count++;
-					total.textContent = count;
-					console.log(count);
+					totalValue.textContent = count;
 				}
-			}, 200);
+			}, 2);
+			console.log(total);
+
 		};
 
 		calcBlock.addEventListener('change', event => {
