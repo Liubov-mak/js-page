@@ -295,21 +295,30 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	const pic = () => {
 		const command = document.querySelector('#command');
-		const srcI = command.querySelector("#command > div > div.row > div > img").src;
+		const commandPhotos = command.querySelectorAll('.command__photo');
 
 		command.addEventListener('mouseover', event => {
 			if (event.target.matches('.command__photo')) {
-				event.target.src = event.target.dataset.img;
-				event.preventDefault();
+				for (let i = 0; i < commandPhotos.length; i++) {
+					if (event.target === commandPhotos[i]) {
+						const targetSrc = event.target.src;
+						event.target.src = event.target.dataset.img;
+						event.target.dataset.img = targetSrc;
+					}
+				}
 			}
 		});
-		/* for (let i = 0; i < srcI.length; i++) { */
 		command.addEventListener('mouseout', event => {
 			if (event.target.matches('.command__photo')) {
-				event.target.src = srcI;
+				for (let i = 0; i < commandPhotos.length; i++) {
+					if (event.target === commandPhotos[i]) {
+						const targetSrc = event.target.src;
+						event.target.src = event.target.dataset.img;
+						event.target.dataset.img = targetSrc;
+					}
+				}
 			}
 		});
-		/* } */
 	};
 	pic();
 
@@ -348,6 +357,17 @@ window.addEventListener('DOMContentLoaded', function() {
 				total = 0;
 			}
 			totalValue.textContent = total;
+
+			// анимация total
+
+			/* let count = 0;
+			setInterval(() => {
+				if (count < total) {
+					count++;
+					total.textContent = count;
+					console.log(count);
+				}
+			}, 200); */
 		};
 
 		calcBlock.addEventListener('change', event => {
