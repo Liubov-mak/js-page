@@ -155,6 +155,22 @@ window.addEventListener('DOMContentLoaded', function() {
 	};
 	togglePopUp();
 
+	// scroll
+
+	const scroll = () => {
+		const smooth = document.querySelector("body > main > a");
+		smooth.addEventListener('click', e => {
+			e.preventDefault();
+			const id = smooth.getAttribute('href');
+
+			document.querySelector(id).scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			});
+		});
+	};
+	scroll();
+
 	// tabs
 
 	const tabs = () => {
@@ -396,6 +412,89 @@ window.addEventListener('DOMContentLoaded', function() {
 		});
 	};
 	calc(100);
+
+	// send-ajax-form
+
+	const sendForm = () => {
+		const errorMessage = 'Что-то пошло не так...',
+			loadMessage = 'Загрузка...',
+			successMesage = 'Спасибо! Мы скоро с Вами свяжемся!';
+
+		const form = document.getElementById('form1');
+		const statusMessage = document.createElement('div');
+		statusMessage.style.color = '#19b5fe';
+		statusMessage.style.margin = '25px';
+
+		form.addEventListener('submit', event => {
+			event.preventDefault();
+			form.appendChild(statusMessage);
+			statusMessage.textContent = loadMessage;
+			const formData = new FormData(form);
+
+			const body = {};
+			formData.forEach((val, key) => {
+				body[key] = val;
+			});
+			postData(body, () => {
+				statusMessage.textContent = successMesage;
+			}, error => {
+				statusMessage.textContent = errorMessage;
+				console.error(error);
+			});
+		});
+
+		const postData = (body, outputData, errorData) => {
+			const request = new XMLHttpRequest();
+			request.addEventListener('readystatechange', () => {
+				if (request.readyState !== 4) {
+					return;
+				}
+				if (request.status === 200) {
+					outputData();
+				} else {
+					errorData(request.status);
+				}
+			});
+			request.open('POST', 'server.php');
+			request.setRequestHeader('Content-Type', 'application/json');
+			request.send(JSON.stringify(body));
+		};
+	};
+	sendForm();
+
+	const reg = () => {
+		const form2Message = document.getElementById('form2-message'),
+			form1Name = document.getElementById('form1-name'),
+			form2Name = document.getElementById('form2-name'),
+			form3Name = document.getElementById('form3-name'),
+			form1Phone = document.getElementById('form1-phone'),
+			form3Phone = document.getElementById('form3-phone'),
+			form2Phone = document.getElementById('form2-phone');
+
+		form2Message.addEventListener('input', () => {
+			form2Message.value = form2Message.value.replace(/[a-zA-Z]/g, '');
+		});
+		form1Name.addEventListener('input', () => {
+			form1Name.value = form1Name.value.replace(/[a-zA-Z]/g, '');
+		});
+		form2Name.addEventListener('input', () => {
+			form2Name.value = form2Name.value.replace(/[a-zA-Z]/g, '');
+		});
+		form3Name.addEventListener('input', () => {
+			form3Name.value = form3Name.value.replace(/[a-zA-Z]/g, '');
+		});
+		form1Phone.addEventListener('input', () => {
+			form1Phone.value = form1Phone.value.replace(/[^0-9+]/g, '');
+		});
+		form3Phone.addEventListener('input', () => {
+			form3Phone.value = form3Phone.value.replace(/[^0-9+]/g, '');
+		});
+		form2Phone.addEventListener('input', () => {
+			form2Phone.value = form2Phone.value.replace(/[^0-9+]/g, '');
+		});
+		/* (/\+?[78]([-()]*\d){10}/g) */
+	};
+	reg();
 });
 
 
