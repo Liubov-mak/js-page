@@ -416,6 +416,24 @@ window.addEventListener('DOMContentLoaded', function() {
 	// send-ajax-form
 
 	const sendForm = () => {
+
+		const postData = body => new Promise((resolve, reject) => {
+			const request = new XMLHttpRequest();
+			request.addEventListener('readystatechange', () => {
+				if (request.readyState !== 4) {
+					return;
+				}
+				if (request.status === 200) {
+					resolve();
+				} else {
+					reject(request.status);
+				}
+			});
+			request.open('POST', 'server.php');
+			request.setRequestHeader('Content-Type', 'application/json');
+			request.send(JSON.stringify(body));
+		});
+
 		const errorMessage = 'Что-то пошло не так...',
 			loadMessage = 'Загрузка...',
 			successMesage = 'Спасибо! Мы скоро с Вами свяжемся!';
@@ -425,42 +443,30 @@ window.addEventListener('DOMContentLoaded', function() {
 		statusMessage.style.color = '#19b5fe';
 		statusMessage.style.margin = '25px';
 
-		form.addEventListener('submit', event => {
-			event.preventDefault();
-			form.appendChild(statusMessage);
-			statusMessage.textContent = loadMessage;
-			const formData = new FormData(form);
+		const formSend = () => {
+			form.addEventListener('submit', event => {
+				event.preventDefault();
+				form.appendChild(statusMessage);
+				statusMessage.textContent = loadMessage;
+				const formData = new FormData(form);
 
-			const body = {};
-			formData.forEach((val, key) => {
-				body[key] = val;
+				const body = {};
+				formData.forEach((val, key) => {
+					body[key] = val;
+				});
+				postData(body, () => {
+					statusMessage.textContent = successMesage;
+				}, error => {
+					statusMessage.textContent = errorMessage;
+					console.error(error);
+				});
 			});
-			postData(body, () => {
-				statusMessage.textContent = successMesage;
-			}, error => {
-				statusMessage.textContent = errorMessage;
-				console.error(error);
-			});
-		});
-
-		const postData = (body, outputData, errorData) => {
-			const request = new XMLHttpRequest();
-			request.addEventListener('readystatechange', () => {
-				if (request.readyState !== 4) {
-					return;
-				}
-				if (request.status === 200) {
-					outputData();
-				} else {
-					errorData(request.status);
-				}
-			});
-			request.open('POST', 'server.php');
-			request.setRequestHeader('Content-Type', 'application/json');
-			request.send(JSON.stringify(body));
 		};
+		/* formSend(); */
 	};
-	sendForm();
+	sendForm()
+		.then(formSend)
+		.catch(error => console.error(error));
 
 	const reg = () => {
 		const form2Message = document.getElementById('form2-message'),
