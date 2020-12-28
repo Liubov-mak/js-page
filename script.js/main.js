@@ -462,11 +462,11 @@ window.addEventListener('DOMContentLoaded', function() {
 				});
 			});
 		};
-		/* formSend(); */
+		postData()
+			.then(formSend)
+			.catch(error => console.error(error));
 	};
-	sendForm()
-		.then(formSend)
-		.catch(error => console.error(error));
+	sendForm();
 
 	const reg = () => {
 		const form2Message = document.getElementById('form2-message'),
