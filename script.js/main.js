@@ -451,6 +451,10 @@ window.addEventListener('DOMContentLoaded', function() {
 					statusMessage.textContent = errorMessage;
 					console.error(error);
 				});
+
+			setTimeout(() => {
+				form.querySelectorAll('input').forEach(element => { element.value = ''; });
+			}, 2000);
 		});
 	};
 	sendForm();
