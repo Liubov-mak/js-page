@@ -1,5 +1,3 @@
-'use strict';
-
 import countTimer from './modules/countTimer';
 import toggleMenu from './modules/toggleMenu';
 import togglePopUp from './modules/togglePopUp';
@@ -12,7 +10,7 @@ import sendForm from './modules/sendForm';
 import reg from './modules/reg';
 
 // timer
-countTimer('31 december 2020');
+countTimer('01 january 2021');
 // меню
 toggleMenu();
 // popup
