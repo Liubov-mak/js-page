@@ -47,7 +47,7 @@ class Validator {
 			this.showError(target);
 			this.error.add(target);
 		}
-		console.log(this.error);
+		/* this.error; */
 	}
 	showError(elem) {
 		elem.classList.remove('success');

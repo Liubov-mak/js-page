@@ -5,7 +5,9 @@ const sendForm = () => {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: 'formData'
+		/* body: 'formData' */
+		/* body: JSON.stringify(this.data), */
+		body: JSON.stringify(FormData)
 	});
 
 	const errorMessage = 'Что-то пошло не так...',
@@ -17,8 +19,6 @@ const sendForm = () => {
 		form3 = document.getElementById('form3');
 
 	const form = [form1, form2, form3];
-	console.log(form);
-
 
 	const statusMessage = document.createElement('div');
 	statusMessage.style.color = '#19b5fe';

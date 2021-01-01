@@ -798,7 +798,7 @@ footer .web {
     -webkit-transform: translateX(-50px);
     transform: translateX(-50px);
     padding: 2rem 6rem;
-    background-color: #24241f
+    background-color: #24241f;    
 }
 
 .popup .form-btn {
@@ -1178,5 +1178,13 @@ footer .web {
 
     .portfolio-btn.prev {
         left: 5px
+    }
+}
+@keyframes showBlock {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }

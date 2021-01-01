@@ -21,11 +21,17 @@ const toggleMenu = () => {
 		}
 	});
 
+	// плавный скролл якорей
+
 	const service = document.querySelector('.service'),
-		portfolio = document.querySelector('.portfolio');
+		portfolio = document.querySelector('.portfolio'),
+		calc = document.querySelector('.calc'),
+		command = document.querySelector('.command'),
+		connect = document.querySelector('.connect');
+
 	menuList[0].addEventListener('click', () => {
 		event.preventDefault();
-		document.documentElement.scrollTop = 900;
+		/* document.documentElement.scrollTop = 900; */
 		service.scrollIntoView({
 			behavior: 'smooth',
 			block: 'start'
@@ -33,23 +39,31 @@ const toggleMenu = () => {
 	});
 	menuList[1].addEventListener('click', () => {
 		event.preventDefault();
-		document.documentElement.scrollTop = 1980;
 		portfolio.scrollIntoView({
-			behavior: 'smooth',
-			block: 'start'
+			block: 'start',
+			behavior: 'smooth'
 		});
 	});
 	menuList[2].addEventListener('click', () => {
 		event.preventDefault();
-		document.documentElement.scrollTop = 2375;
+		calc.scrollIntoView({
+			block: 'start',
+			behavior: 'smooth'
+		});
 	});
 	menuList[3].addEventListener('click', () => {
 		event.preventDefault();
-		document.documentElement.scrollTop = 3545;
+		command.scrollIntoView({
+			block: 'start',
+			behavior: 'smooth'
+		});
 	});
 	menuList[4].addEventListener('click', () => {
 		event.preventDefault();
-		document.documentElement.scrollTop = 4745;
+		connect.scrollIntoView({
+			block: 'start',
+			behavior: 'smooth'
+		});
 	});
 
 };
