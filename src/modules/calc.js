@@ -36,38 +36,19 @@ const calc = (price = 100) => {
 
 		// анимация total
 
-		function animate({ duration, draw, timing }) {
-			const start = performance.now();
-			requestAnimationFrame(function animate(time) {
-				let timeFraction = (time - start) / duration;
-				if (timeFraction > 1) timeFraction = 1;
-				const progress = timing(timeFraction);
-				draw(progress);
-				if (timeFraction < 1) {
-					requestAnimationFrame(animate);
+		function animateValue(start, duration) {
+			let startTimestamp = null;
+			const step = timestamp => {
+				if (!startTimestamp) startTimestamp = timestamp;
+				const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+				totalValue.textContent = Math.floor(progress * start);
+				if (progress < 1) {
+					window.requestAnimationFrame(step);
 				}
-			});
+			};
+			window.requestAnimationFrame(step);
 		}
-
-		animate({
-			// скорость анимации
-			duration: 2000,
-			// Функция расчёта времени
-			timing(timeFraction) {
-				return timeFraction;
-			},
-			// Функция отрисовки
-			draw(progress) {
-				let count = 0;
-				// в ней мы и производим вывод данных
-				setInterval(() => {
-					if (count < total) {
-						count++;
-						totalValue.textContent = Math.floor(progress * count);
-					}
-				}, 2);
-			}
-		});
+		animateValue(total, 5000);
 	};
 
 	calcBlock.addEventListener('change', event => {

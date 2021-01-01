@@ -7,9 +7,6 @@ const togglePopUp = () => {
 		const popupContent = document.querySelector('.popup-content');
 		popupContent.style.animation = 'showBlock 1s linear forwards';
 
-
-
-
 		let stepLeft = 0;
 		function move() {
 			stepLeft += 5;
@@ -22,7 +19,7 @@ const togglePopUp = () => {
 		requestAnimationFrame(move);
 		/* const intViewportWidth = window.innerWidth;
 		if (intViewportWidth < 768) {
-			
+
 		} */
 		/* popupContent.style.top = '0 px';
 		let count = 0;
