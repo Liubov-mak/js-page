@@ -10,7 +10,7 @@ import sendForm from './modules/sendForm';
 import reg from './modules/reg';
 
 // timer
-countTimer('01 january 2021');
+countTimer('12 january 2021');
 // меню
 toggleMenu();
 // popup

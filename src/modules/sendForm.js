@@ -1,13 +1,11 @@
 const sendForm = () => {
 
-	const postData = () => fetch('./server.php', {
+	const postData = data => fetch('./server.php', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		/* body: 'formData' */
-		/* body: JSON.stringify(this.data), */
-		body: JSON.stringify(FormData)
+		body: JSON.stringify(data)
 	});
 
 	const errorMessage = 'Что-то пошло не так...',
@@ -29,9 +27,14 @@ const sendForm = () => {
 			event.preventDefault();
 			element.appendChild(statusMessage);
 			const formData = new FormData(element);
+			const body = {};
 			statusMessage.textContent = loadMessage;
 
-			postData(formData)
+			formData.forEach((val, key) => {
+				body[key] = val;
+			});
+
+			postData(body)
 				.then(response => {
 					if (response.status !== 200) {
 						throw new Error('status network not 200');
