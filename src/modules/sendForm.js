@@ -48,7 +48,10 @@ const sendForm = () => {
 
 			setTimeout(() => {
 				element.querySelectorAll('input').forEach(element => { element.value = ''; });
-			}, 1500);
+			}, 2000);
+			setTimeout(() => {
+				statusMessage.style.display = 'none';
+			}, 4000);
 		});
 	});
 

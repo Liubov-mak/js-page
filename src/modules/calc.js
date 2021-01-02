@@ -48,7 +48,7 @@ const calc = (price = 100) => {
 			};
 			window.requestAnimationFrame(step);
 		}
-		animateValue(total, 5000);
+		animateValue(total, 1000);
 	};
 
 	calcBlock.addEventListener('change', event => {

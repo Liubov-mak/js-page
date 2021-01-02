@@ -1,34 +1,32 @@
 const reg = () => {
-	const form2Message = document.getElementById('form2-message'),
-		form1Name = document.getElementById('form1-name'),
-		form2Name = document.getElementById('form2-name'),
-		form3Name = document.getElementById('form3-name'),
-		form1Phone = document.getElementById('form1-phone'),
-		form3Phone = document.getElementById('form3-phone'),
-		form2Phone = document.getElementById('form2-phone');
+	const userName = document.querySelectorAll('[name="user_name"]'),
+		userPhone = document.querySelectorAll('[name="user_phone"]'),
+		userEmail = document.querySelectorAll('[name="user_email"]'),
+		form2Message = document.getElementById('form2-message');
 
-	form2Message.addEventListener('input', () => {
-		form2Message.value = form2Message.value.replace(/[a-zA-Z]/g, '');
+	userName.forEach(elem => {
+		elem.addEventListener('input', () => { // в поле "имя" только кириллица и пробел
+			const regex = /[^А-ЯЁа-яё\s]+/g;
+			elem.value = elem.value.replace(regex, '');
+		});
 	});
-	form1Name.addEventListener('input', () => {
-		form1Name.value = form1Name.value.replace(/[a-zA-Z]/g, '');
+	userPhone.forEach(elem => {
+		elem.addEventListener('input', () => {
+			elem.value = elem.value.replace(/[^0-9+]/g, '');
+			elem.value = elem.value.replace(/\w{13,}/g, '');
+		});
 	});
-	form2Name.addEventListener('input', () => {
-		form2Name.value = form2Name.value.replace(/[a-zA-Z]/g, '');
+	userEmail.forEach(elem => {
+		elem.addEventListener('input', () => {
+			const regex2 = /[^\w+@\w+.\w{2,3}]+/g;
+			elem.value = elem.value.replace(regex2, '');
+		});
 	});
-	form3Name.addEventListener('input', () => {
-		form3Name.value = form3Name.value.replace(/[a-zA-Z]/g, '');
+
+	form2Message.addEventListener('input', () => { // поле "мое сообщение" только кириллица, пробел и "." "," "!" "?"-символы
+		const regex3 = /[^А-ЯЁа-яё\s.,!?]+/g;
+		form2Message.value = form2Message.value.replace(regex3, '');
 	});
-	form1Phone.addEventListener('input', () => {
-		form1Phone.value = form1Phone.value.replace(/[^0-9+]/g, '');
-	});
-	form3Phone.addEventListener('input', () => {
-		form3Phone.value = form3Phone.value.replace(/[^0-9+]/g, '');
-	});
-	form2Phone.addEventListener('input', () => {
-		form2Phone.value = form2Phone.value.replace(/[^0-9+]/g, '');
-	});
-	/* (/\+?[78]([-()]*\d){10}/g) */
 };
 
 
