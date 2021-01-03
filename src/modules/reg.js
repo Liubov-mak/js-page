@@ -1,3 +1,5 @@
+import sendForm from "./sendForm";
+
 const reg = () => {
 	const userName = document.querySelectorAll('[name="user_name"]'),
 		userPhone = document.querySelectorAll('[name="user_phone"]'),
@@ -31,3 +33,4 @@ const reg = () => {
 
 
 export default reg;
+

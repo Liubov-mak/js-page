@@ -22,6 +22,12 @@ const sendForm = () => {
 	statusMessage.style.color = '#19b5fe';
 	statusMessage.style.margin = '25px';
 
+	const divClear = () => {
+		setTimeout(() => {
+			statusMessage.textContent = '';
+		}, 3000);
+	};
+
 	form.forEach(element => {
 		element.addEventListener('submit', event => {
 			event.preventDefault();
@@ -34,28 +40,47 @@ const sendForm = () => {
 				body[key] = val;
 			});
 
-			postData(body)
-				.then(response => {
-					if (response.status !== 200) {
-						throw new Error('status network not 200');
-					}
-					statusMessage.textContent = successMesage;
-				})
-				.catch(error => {
-					statusMessage.textContent = errorMessage;
-					console.error(error);
-				});
+			const clearInput = () => {
+				setTimeout(() => {
+					element.querySelectorAll('input').forEach(element => { element.value = ''; });
+				}, 2000);
+			};
 
-			setTimeout(() => {
-				element.querySelectorAll('input').forEach(element => { element.value = ''; });
-			}, 2000);
-			setTimeout(() => {
-				statusMessage.style.display = 'none';
-			}, 4000);
+			const lengthVerify = body => {
+				if (body.user_name === '' || body.user_phone === '' || body.user_email === "") {
+					return false;
+				} else if (body.user_name < 3) {
+					return false;
+				} else if (body.user_phone.length <= 10 || body.user_phone.length >= 13) {
+					return false;
+				} else {
+					return true;
+				}
+			};
+
+			if (lengthVerify(body) === false) {
+				statusMessage.textContent = 'Пожалуйста, корректно внесите данные';
+				lengthVerify(body);
+				clearInput();
+				divClear();
+			} else {
+				postData(body)
+					.then(response => {
+						if (response.status !== 200) {
+							throw new Error('status network not 200');
+						}
+						statusMessage.textContent = successMesage;
+						divClear();
+					})
+					.catch(error => {
+						statusMessage.textContent = errorMessage;
+						console.error(error);
+						divClear();
+					});
+				clearInput();
+			}
 		});
 	});
-
 };
-
 
 export default sendForm;
