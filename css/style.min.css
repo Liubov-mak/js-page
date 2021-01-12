@@ -1188,3 +1188,64 @@ footer .web {
         opacity: 1;
     }
 }
+
+
+/* календарь */
+.cal-container {
+    position: relative;
+}
+.cal-container {
+    width: 30%;
+    margin: 0 auto;    
+}
+@media (max-width: 723px){
+    .cal-container {
+        width: 80%;
+    }
+}
+table {
+    border-collapse: collapse;
+}
+td, th {
+    /* border: 1px solid black; */
+    padding: 3px;
+    text-align: center;
+    transition-duration: 0.5s;
+}
+td:hover {
+    background-color: red;    
+    border-radius: 20px;
+    cursor: pointer;    
+};
+th {
+    font-weight: bold;
+    background-color: #E6E6E6;
+}
+.month {
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#cal-left,
+#cal-right {
+    position: absolute;
+    top: 50%;    
+    border: 0.5px solid black;
+    background-color: transparent;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;    
+    padding-bottom: 5px;
+}
+#cal-left {
+    left: 0;    
+}
+#cal-right {
+    right: 0;
+}
